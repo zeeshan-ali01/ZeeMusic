@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, StatusBar} from 'react-native'
+import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, StatusBar, TextInput} from 'react-native'
 import React, {useState} from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -23,7 +23,10 @@ const Discover = () => {
       <View style={{marginTop: 40}}>
         <StatusBar backgroundColor="transparent" translucent />
       </View>
-      <ScrollView>
+      <ScrollView >
+        <View style={styles.inputContainer}>
+          <TextInput placeholder="Search for any song" style={styles.input} onFocus={() => console.log("focussed")} />
+        </View>
         <Text style={{fontSize: wp('6%'), color: 'white', fontWeight: 'bold', margin: 10 }}>Top Charts</Text>
         <View style={{width: '95%', alignSelf:'center', marginVertical: 8}}>
           <TrackBar img={images.placeholder} title="Under The Influence" artist="Chris Brown" />
@@ -84,8 +87,18 @@ const styles = StyleSheet.create({
     height: 100, 
     resizeMode: 'cover', 
     borderRadius: 50,
-    // marginHorizontal: 5,
     marginLeft: 15
+  },
+  inputContainer: {
+    width:'95%',
+    alignSelf: 'center'
+  },
+  input: {
+    backgroundColor: "white",
+    borderRadius: 50,
+    padding: 12,
+    marginVertical: 10,
+    
 
   }
 })

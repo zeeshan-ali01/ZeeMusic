@@ -1,45 +1,59 @@
-import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, StatusBar, TouchableOpacity } from 'react-native'
 import React from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {images} from '../assets/images'
 import TrackBar from '../components/TrackBar'
 import TrackCard from '../components/TrackCard';
 
-const Discover = () => {
-  return (
+import { useDispatch, useSelector } from 'react-redux';
+// import { setTopCharts } from '../redux/topChartsSlice';
+import { getPhotos } from '../redux/topChartsSlice';
 
+const Discover = () => {
+  const dispatch = useDispatch();
+  const {photos} = useSelector(state => state.photos)
+  
+  console.log(photos)
+  
+  return (
     
     <ImageBackground source={images.background} style={styles.container} blurRadius={2.2}>
         <View style={{marginTop: 40}}>
           <StatusBar backgroundColor="transparent" translucent />
         </View>
-      <ScrollView>
-        
-        <Text style={{fontSize: wp('6%'), color: 'white', fontWeight: 'bold', margin: 10 }}>Top Artists</Text>
-        <ScrollView horizontal={true} contentContainerStyle={{ paddingVertical: 15}} showsHorizontalScrollIndicator={false} >
-          <Image source={images.person01} style={styles.artist} />
-          <Image source={images.person02} style={styles.artist} />
-          <Image source={images.person03} style={styles.artist} />
-          <Image source={images.person04} style={styles.artist} />
-          <Image source={images.person05} style={styles.artist} />
-          <Image source={images.person06} style={styles.artist} />
-        </ScrollView>
-        
-        <View style={{flexDirection: 'row'}}>
-          <Text style={{fontSize: wp('6%'), color: 'white', fontWeight: 'bold', margin: 10 }}>Top Charts</Text>
-        </View>
-        <View style={{width: '95%', alignSelf:'center', marginVertical: 8}}>
-          <TrackBar img={images.placeholder} title="Under The Influence" artist="Chris Brown" />
-        </View>
-        <View style={{width: '95%', alignSelf:'center', marginVertical: 8}}>
-          <TrackBar img={images.placeholder} title="Under The Influence" artist="Chris Brown" />
-        </View>
-        <View style={{width: '95%', alignSelf:'center', marginVertical: 8}}>
-          <TrackBar img={images.placeholder} title="Under The Influence" artist="Chris Brown" />
-        </View>
+        <ScrollView>
+          
+          <Text style={{fontSize: wp('6%'), color: 'white', fontWeight: 'bold', margin: 10 }}>Top Artists</Text>
+          <ScrollView horizontal={true} contentContainerStyle={{ paddingVertical: 15}} showsHorizontalScrollIndicator={false} >
+            <Image source={images.person01} style={styles.artist} />
+            <Image source={images.person02} style={styles.artist} />
+            <Image source={images.person03} style={styles.artist} />
+            <Image source={images.person04} style={styles.artist} />
+            <Image source={images.person05} style={styles.artist} />
+            <Image source={images.person06} style={styles.artist} />
+          </ScrollView>
 
-        
-      </ScrollView>
+          <TouchableOpacity onPress={() => {
+            dispatch(getPhotos())
+          }}>
+            <Text style={{fontSize: wp('10%')}}>Click Me</Text>
+          </TouchableOpacity>
+          
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{fontSize: wp('6%'), color: 'white', fontWeight: 'bold', margin: 10 }}>Top Charts</Text>
+          </View>
+          <View style={{width: '95%', alignSelf:'center', marginVertical: 8}}>
+            <TrackBar img={images.placeholder} title="Under The Influence" artist="Chris Brown" />
+          </View>
+          <View style={{width: '95%', alignSelf:'center', marginVertical: 8}}>
+            <TrackBar img={images.placeholder} title="Under The Influence" artist="Chris Brown" />
+          </View>
+          <View style={{width: '95%', alignSelf:'center', marginVertical: 8}}>
+            <TrackBar img={images.placeholder} title="Under The Influence" artist="Chris Brown" />
+          </View>
+
+          
+        </ScrollView>
     </ImageBackground>
   )
 }
