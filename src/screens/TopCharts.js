@@ -7,13 +7,14 @@ import TrackCard from '../components/TrackCard';
 
 import { useDispatch, useSelector } from 'react-redux';
 // import { setTopCharts } from '../redux/topChartsSlice';
-import { getPhotos } from '../redux/topChartsSlice';
+// import { getPhotos } from '../redux/topChartsSlice';
+import { getTopCharts } from '../redux/topChartsSlice';
 
 const Discover = () => {
   const dispatch = useDispatch();
-  const {photos} = useSelector(state => state.photos)
+  const {topCharts} = useSelector(state => state.topCharts)
   
-  console.log(photos)
+  console.log(topCharts)
   
   return (
     
@@ -34,7 +35,7 @@ const Discover = () => {
           </ScrollView>
 
           <TouchableOpacity onPress={() => {
-            dispatch(getPhotos())
+            dispatch(getTopCharts())
           }}>
             <Text style={{fontSize: wp('10%')}}>Click Me</Text>
           </TouchableOpacity>

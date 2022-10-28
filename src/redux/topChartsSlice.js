@@ -1,34 +1,42 @@
 // import { createSlice } from "@reduxjs/toolkit"
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-export const getPhotos = createAsyncThunk(
-  'photos/getPhotos',
-  async () => {
-    const response = await fetch("https://picsum.photos/v2/list")
-    const formatedResponse = await response.json()
-    return formatedResponse
-  }
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '1df173c443msh09a88401904a0f5p174ce8jsn2a97d3e3edce',
+		'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
+	}
+};
+
+
+export const getTopCharts = createAsyncThunk(
+  'topCharts/getTopCharts',
+  fetch('https://shazam-core.p.rapidapi.com/v1/charts/country?country_code=DZ', options)
+    .then(response => response.json())
+    .then(response => console.log(response[0]))
+    .catch(err => console.error(err))
 )
 
 
 const topChartsSlice = createSlice({
   name: "topCharts",
   initialState: {
-    photos: [],
+    topCharts: [],
     isLoading: false
   },
   extraReducers: {
     // setTopCharts(state, action){
     //   state.topCharts.push(action.payload)
     // }
-    [getPhotos.pending]: (state) => {
+    [getTopCharts.pending]: (state) => {
       state.isLoading = true
     },
-    [getPhotos.fulfilled]: (state, action) => {
-      state.photos = action.payload
+    [getTopCharts.fulfilled]: (state, action) => {
+      state.topCharts = action.payload
       state.isLoading = false
     },
-    [getPhotos.rejected]: (state) => {
+    [getTopCharts.rejected]: (state) => {
       state.isLoading = false
     }
 

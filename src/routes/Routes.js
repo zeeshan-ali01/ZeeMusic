@@ -20,7 +20,7 @@ const NativeStack = createNativeStackNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false, tabBarHideOnKeyboard: true}} >
+    <Tab.Navigator initialRouteName="Discover" screenOptions={{headerShown: false, tabBarHideOnKeyboard: true}} >
       <Tab.Screen name="Discover" component={Discover} options={{
         tabBarStyle: {height: '8%'},
         tabBarLabelStyle: {display: 'none'} ,
